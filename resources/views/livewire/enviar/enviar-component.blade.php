@@ -4,35 +4,49 @@
             {{ session('message') }}
         </div>
     @endif
+    <style>
+        .error {
+            color: red; /* Color del texto en rojo */
+            font-size: 14px; /* Tamaño de fuente (opcional) */
+            font-weight: bold; /* Texto en negrita (opcional) */
+        }
+    </style>
     <form wire:submit.prevent="save" class="col-10 mx-auto mt-4">
         <div class="row">
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" wire:model="nombre" placeholder="Escribe tu Nombre">
+                @error('nombre') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="telefono">Teléfono:</label>
                 <input type="text" class="form-control" wire:model="telefono" placeholder="Teléfono">
+                @error('telefono') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="direccion">Dirección:</label>
                 <input type="text" class="form-control" wire:model="direccion" placeholder="Dirección">
+                @error('direccion') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="dni">DNI:</label>
                 <input type="text" class="form-control" wire:model="dni" placeholder="DNI">
+                @error('dni') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="CUIT">CUIT:</label>
                 <input type="text" class="form-control" wire:model="cuit" placeholder="CUIT">
+                @error('cuit') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="institucion">Institución:</label>
                 <input type="text" class="form-control" wire:model="institucion" placeholder="Institución">
+                @error('institucion') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" wire:model="email" placeholder="Email">
+                @error('email') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="form-group col-7 mb-2 btn btn-warning ml-3" style="height: fit-content;margin-top: 2%;">
                 <label for="archivo">Déjanos tu archivo:</label>
@@ -44,6 +58,7 @@
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="cantidadhojas">Cantidad de Hojas:</label>
                 <input type="number" class="form-control" wire:model="cantidadhojas" placeholder="Cantidad de Hojas">
+                @error('cantidadhojas') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
@@ -54,7 +69,7 @@
                         <option value="{{ $sistema->factor }}">{{ $sistema->sistema }}</option>
                     @endforeach
                 </select>
-                </select>
+                @error('tipodeimpresion') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
@@ -65,6 +80,7 @@
                         <option value="{{ $lado->factor }}">{{ $lado->lados }}</option>
                     @endforeach
                 </select>
+                @error('frentedorso') <span class="error">{{ $message }}</span> @enderror
             </div>
 
 
@@ -89,12 +105,13 @@
                         <option value="{{ $gramaje->precio }}">{{ $gramaje->gramaje }} - {{ $gramaje->tamano_papel }}</option>
                     @endforeach
                 </select>
-                </select>
+                @error('tipodepapel') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="cantidadEjemplares">Cantidad de Ejemplares:</label>
                 <input type="number" class="form-control"  wire:model="cantidadejemplares" placeholder="Cantidad de Ejemplares">
+                @error('cantidadejemplares') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-md-12 col-lg-4 mt-3 mb-2">

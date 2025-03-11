@@ -15,28 +15,28 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cliente_id')->default(0);
             $table->string('nombre');
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->string('direccion');
             $table->string('dni');
             $table->string('cuit');
-            $table->string('institucion');
-            $table->string('email');
-            $table->string('archivo');
-            $table->double('cantidadhojas');
-            $table->string('tipodeimpresion');
+            $table->string('institucion')->nullable();
+            $table->string('email')->nullable();
+            $table->string('archivo')->nullable();
+            $table->double('cantidadhojas')->nullable();
+            $table->string('tipodeimpresion')->nullable();
             $table->unsignedBigInteger('tipodocumento'); // tablas
-            $table->string('tamanopapel');
-            $table->string('tipodepapel');      // tipos de papel tabla
-            $table->boolean('frentedorso');     // 0ambas caras | 1 simple faz
-            $table->double('cantidadejemplares');
+            $table->string('tamanopapel')->nullable();
+            $table->string('tipodepapel')->nullable();      // tipos de papel tabla
+            $table->boolean('frentedorso')->nullable();     // 0ambas caras | 1 simple faz
+            $table->double('cantidadejemplares')->nullable();
 
             $table->string('retiraenlocal')->default(1);  // 1 Paso a buscarlo | 2 Enviar x delivery | 3 Enviar a direccion | 4 Otro
             $table->string('lugardeentrega')->default('Local'); // tablas
 
-            $table->string('geoposicion'); // tablas
-            $table->string('observaciones'); // tablas
+            $table->string('geoposicion')->nullable(); // tablas
+            $table->string('observaciones')->nullable(); // tablas
 
-            $table->double('costoaprox');
+            $table->double('costoaprox')->nullable();
             $table->unsignedBigInteger('estado_id');
 
             $table->timestamps();

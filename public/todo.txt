@@ -4,9 +4,8 @@ Envío
 - Eliminar todos los datos de cantidad de hojas, etc al enviar un archivo y dejar los datos del cliente -> Realizado 07/01/2025
 - Ajustar ancho del formulario de Enviar -> Realizado 07/01/2025
 - Definir precios en los tipos de papeles. guardar los datos en una tabla -> Relizado 15/01/2025
+- Agregar Botones de Limpiar y Volver -> Se decide no hacerlo porque no se ve estetico
 
 - Convenios-> hacer crud 
-
-- Agregar Botones de Limpiar y Volver -> Se decide no hacerlo porque no se ve estetico
 
 - Hacer funcionar interfaz de contactos

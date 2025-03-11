@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Enviar;
 
+use App\Models\Cliente;
 use App\Models\Pedido;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -41,7 +42,6 @@ class EnviarComponent extends Component
 
     public function render()
     {
-
         $this->sistemas = sistema_impresion::where('activo',true)->get();
         $this->lados = lado::where('activo',true)->get();
         $this->gramajes = papel::where('activo',true)->get();
@@ -55,8 +55,32 @@ class EnviarComponent extends Component
         // $this->validate([
         //     'photo' => 'image|max:1024', // 1MB Max
         // ]);
+
+
+        $this->validate([
+            'nombre' => 'required',
+            'telefono' => 'required|integer',
+            'direccion' => 'required',
+            'dni' => 'required|integer',
+            'cuit' => 'required|integer',
+            'institucion' => 'required',
+            'email' => 'required',
+            'archivo' => 'required',
+            'cantidadhojas' => 'required|integer',
+            'tipodeimpresion' => 'required',
+            'tamanopapel' => 'required',
+            'tipodepapel' => 'required',
+            'frentedorso' => 'required',
+            'cantidadejemplares' => 'required|integer',
+
+        ]);
+
+        $this->cliente = Cliente::where('dni',$this->dni)->orwhere('email',$this->email)->first();
+        
+        $this->cliente ? $cliente_id = $this->cliente->id : $cliente_id = Cliente::create(['nombre'=>$this->nombre,'dni'=>$this->dni,'email'=>$this->email,'telefono'=>$this->telefono,'direccion'=>$this->direccion,'geoposicion'=>$this->geoposicion,'organizacion'=>'']);
+
         $pedidos = Pedido::create([
-            'cliente_id' => 3, // $this->cliente,
+            'cliente_id' => $cliente_id, // $this->cliente,
             'nombre' => $this->nombre,
             'telefono' => $this->telefono,
             'direccion' => $this->direccion,
@@ -75,8 +99,9 @@ class EnviarComponent extends Component
             'cantidadejemplares' => $this->cantidadejemplares,
             'retiraenlocal' => 1, // $this->retiraenlocal,
             'geoposicion' => 1, //$this->geoposicion,
-            'observaciones' => '', //$this->observaciones,
+            'observaciones' => $this->observaciones,
             'costoaprox' =>26225,
+            'created_at' => now(),
         ]);
         if(count($pedidos)) $this->open = true;
         session()->flash('message', 'Pedido Enviado!!!');
