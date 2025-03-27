@@ -19,7 +19,9 @@ class PedidosComponent extends Component
     public function render()
     {
         $this->estados = Estado::all();
-        $this->pedidos = Pedido::orderby('created_at','DESC')->get();
+        $this->pedidos = Pedido::orderby('created_at','DESC')
+        ->where('mostrar',1)
+        ->get();
         return view('livewire.pedidos.pedidos-component')->extends('layouts.app');
         // return view('livewire.pedidos.pedidos-component')->extends('adminlte::page');
     }
