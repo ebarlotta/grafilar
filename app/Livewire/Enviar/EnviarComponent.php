@@ -56,7 +56,6 @@ class EnviarComponent extends Component
         //     'photo' => 'image|max:1024', // 1MB Max
         // ]);
 
-
         $this->validate([
             'nombre' => 'required',
             'telefono' => 'required|integer',
@@ -65,13 +64,13 @@ class EnviarComponent extends Component
             'cuit' => 'required|integer',
             'institucion' => 'required',
             'email' => 'required',
-            'archivo' => 'required',
-            'cantidadhojas' => 'required|integer',
-            'tipodeimpresion' => 'required',
-            'tamanopapel' => 'required',
             'tipodepapel' => 'required',
             'frentedorso' => 'required',
             'cantidadejemplares' => 'required|integer',
+            'tipodeimpresion' => 'required',
+            
+            'cantidadhojas' => 'required|integer',
+
 
         ]);
 
@@ -103,7 +102,7 @@ class EnviarComponent extends Component
             'costoaprox' =>26225,
             'created_at' => now(),
         ]);
-        if(count($pedidos)) $this->open = true;
+        if($pedidos) $this->open = true;
         session()->flash('message', 'Pedido Enviado!!!');
         
         $this->reset('archivo','photo','cantidadhojas','tipodocumento','tamanopapel','tipodepapel','tipodeimpresion','frentedorso','cantidadejemplares','retiraenlocal','geoposicion','observaciones','costoaprox');

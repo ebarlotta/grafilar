@@ -83,6 +83,15 @@ public function OcultarDatos() { $this->datos=false; }
     // public function MostrarPrincipal() { $this->principal = true; }
     // public function OcultarPrincipal() { $this->principal = false; }
 
-
+    public function descargar($nombreArchivo)
+    {
+        $rutaArchivo = storage_path('storage/'.$nombreArchivo); //'app/public/' .
+    
+        if (!file_exists($rutaArchivo)) {
+            abort(404, 'El archivo no existe.');
+        }
+    
+        return response()->download($rutaArchivo);
+    }
 
 }

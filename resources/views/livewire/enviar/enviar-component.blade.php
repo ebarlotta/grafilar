@@ -4,13 +4,14 @@
             {{ session('message') }}
         </div>
     @endif
-    <style>
-        .error {
-            color: red; /* Color del texto en rojo */
-            font-size: 14px; /* Tamaño de fuente (opcional) */
-            font-weight: bold; /* Texto en negrita (opcional) */
-        }
-    </style>
+
+<style>
+    .error {
+        color: red; /* Color del texto en rojo */
+        font-size: 14px; /* Tamaño de fuente (opcional) */
+        font-weight: bold; /* Texto en negrita (opcional) */
+    }
+</style>
     <form wire:submit.prevent="save" class="col-10 mx-auto mt-4">
         <div class="row">
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
@@ -127,7 +128,8 @@
 
             <div class="form-group col-sm-12 col-md-12 col-lg-4 mt-3 mb-2">
                 <label for="cantidadEjemplares">Observaciones:</label>
-                <textarea name="" id="" cols="60" rows="2">{{ $observaciones }}</textarea>
+            <textarea wire:model="observaciones" name="" id="" cols="60" rows="2"></textarea>
+            
             </div>
             <div class="form-group col-sm-6 col-md-6 col-lg-4 mt-3 mb-2">
                 <label for="cantidadEjemplares">Costo Aproximado:</label>

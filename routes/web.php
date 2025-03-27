@@ -33,6 +33,7 @@ Route::get('/galeria', function () { return view('galeria'); })->name('galeria')
 // Route::get('/enviar', function () { return view('enviar'); })->name('enviar');
 Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
 
+Route::get('/descargar-archivo/{nombreArchivo}', [PedidosComponent::class, 'descargar']);
 
 Route::middleware([
     'auth:sanctum',

@@ -5,33 +5,52 @@
         </div>
     @endif
 <div class="mx-4 mr-4">
-    <table style="width: 100%">
+    <table class="table table-striped" style="width: 100%">
         <thead>
             <tr>
                 <th>Fecha</th>
                 <th>lugardeentrega</th>
                 <th>Propietario</th>
                 <th>Estado</th>
-                <th>Opciones</th>
+                <th>Observaciones</th>
+                <th style="width:40%">Opciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach($pedidos as $pedido) 
                 <tr 
-                @if($pedido->estado->name=='Recibido') style="background-color: white;" @endif
-                @if($pedido->estado->name=='En proceso') style="background-color: #FFCF30;" @endif
-                @if($pedido->estado->name=='Impreso') style="background-color:  #A8CF45;" @endif
-                @if($pedido->estado->name=='Para Enviar') style="background-color: ligthblue;" @endif
-                @if($pedido->estado->name=='Entregado')  class="font-weight-bold" style="background-color: grey; color:white; " @endif
-
+                @if($pedido->estado->name=='Recibido') style="background-color: #Ed3237;" @endif
+                @if($pedido->estado->name=='En proceso') style="background-color: #F58634;" @endif
+                @if($pedido->estado->name=='Impreso') style="background-color: #00A859;" @endif
+                @if($pedido->estado->name=='Imp. en acabado') style="background-color:  #A8518A;" @endif
+                @if($pedido->estado->name=='Imp. en AcabadoExt.') style="background-color:  #9D98CA;" @endif
+                @if($pedido->estado->name=='Para Enviar') style="background-color: #00AFEF;" @endif
+                @if($pedido->estado->name=='Entregado al transporte')  class="font-weight-bold" style="background-color: #ACE1F9; " @endif
+                @if($pedido->estado->name=='Entregado al cliente')  class="font-weight-bold" style="background-color: #FEFEFE; " @endif
                 >
-                    <td>{{ date_format($pedido->created_at,'d-m-Y')  }}</td>
+                    <td>
+                        {{ date_format($pedido->created_at,'d-m-Y')  }}<br>
+                        
+                        <?php $fechaHora = $pedido->created_at;
+                                // Convertir a timestamp y restar 3 horas (3 * 3600 segundos)
+                                $timestampMenos3Horas = strtotime($fechaHora) - (3 * 3600);
+                                
+                                // Formatear la fecha y hora resultante
+                                $horaFormateada = date('H:i:s', $timestampMenos3Horas);
+                                echo $horaFormateada;
+                        ?>
+                    </td>
                     <td>{{ $pedido->lugardeentrega }}</td>
                     <td>{{ $pedido->nombre }}</td>
                     <td>{{ $pedido->estado->name }}</td>
+                    <td>{{ $pedido->observaciones }}</td>
                     <td>
                         <div class="flex justify-center">
-                            <a href="{{ 'storage/' . substr($pedido->archivo,7) }}" target="_blank"><button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded">Descargar</button></a>
+                            <a href="{{ url('storage/photos/' . substr($pedido->archivo,14)) }}" download>
+                                <button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded">Descargar</button>
+                            </a>
+                            
+                            <!-- <a href="{{ 'storage/' . substr($pedido->archivo,7) }}" target="_blank"><button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded">Descargar</button></a> -->
                             <button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded" wire:click="CargarDatos({{ $pedido->id }})">Datos útiles de impresión</button>
                             <button type="button" class="btn btn-primary" wire:click="CargarEstado({{ $pedido->id }})">Cambiar Estado</button>
                         </div>
