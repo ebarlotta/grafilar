@@ -53,6 +53,7 @@
                             <!-- <a href="{{ 'storage/' . substr($pedido->archivo,7) }}" target="_blank"><button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded">Descargar</button></a> -->
                             <button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded" wire:click="CargarDatos({{ $pedido->id }})">Datos útiles de impresión</button>
                             <button type="button" class="btn btn-primary" wire:click="CargarEstado({{ $pedido->id }})">Cambiar Estado</button>
+                            <button type="button" class="btn btn-primary" wire:click="EnviarBaul({{ $pedido->id }})">Enviar al baúl</button>
                         </div>
                     </td>
                 </tr>

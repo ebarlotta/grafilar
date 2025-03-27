@@ -94,4 +94,8 @@ public function OcultarDatos() { $this->datos=false; }
         return response()->download($rutaArchivo);
     }
 
+    public function EnviarBaul($pedido_id) {
+        $pedido = Pedido::find($pedido_id)->update(['mostrar'=>0]);
+    }
+
 }
