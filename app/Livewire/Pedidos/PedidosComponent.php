@@ -97,7 +97,10 @@ public function OcultarDatos() { $this->datos=false; }
     }
 
     public function EnviarBaul($pedido_id) {
-        $pedido = Pedido::find($pedido_id)->update(['mostrar'=>0]);
+        $pedido = Pedido::find($pedido_id);
+        $pedido->mostrar = 0;
+        $pedido->save();
+        // $pedido = Pedido::find($pedido_id)->update(['mostrar'=>0]);
     }
 
 }
