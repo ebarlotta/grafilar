@@ -38,6 +38,7 @@ return new class extends Migration
 
             $table->double('costoaprox')->nullable();
             $table->unsignedBigInteger('estado_id');
+            $table->boolean('mostrar')->default(true);
 
             $table->timestamps();
 

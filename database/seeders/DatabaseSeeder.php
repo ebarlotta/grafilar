@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EstadoSeeder::class);
         $this->call(TipodocumentoSeeder::class);
+        $this->call(SistemaImpresionSeeder::class);
+        $this->call(LadoSeeder::class);
+        $this->call(PapelSeeder::class);
 
         Cliente::factory()->count(13)->make();
     }

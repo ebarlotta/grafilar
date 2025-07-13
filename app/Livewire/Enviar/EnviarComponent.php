@@ -30,7 +30,7 @@ class EnviarComponent extends Component
     public $tipodepapel;
     public $tipodeimpresion;
     public $frentedorso;
-    public $cantidadejemplares;
+    public $cantidadejemplares=1;
     public $retiraenlocal;
     public $geoposicion;
     public $observaciones;
@@ -38,7 +38,7 @@ class EnviarComponent extends Component
 
     public $open=false;
 
-    public $sistemas, $lados, $gramajes;
+    public $sistemas, $lados, $gramajes, $PrecioEstimado;
 
     public function render()
     {
@@ -74,12 +74,26 @@ class EnviarComponent extends Component
 
         ]);
 
-        $this->cliente = Cliente::where('dni',$this->dni)->orwhere('email',$this->email)->first();
-        
-        $this->cliente ? $cliente_id = $this->cliente->id : $cliente_id = Cliente::create(['nombre'=>$this->nombre,'dni'=>$this->dni,'email'=>$this->email,'telefono'=>$this->telefono,'direccion'=>$this->direccion,'geoposicion'=>$this->geoposicion,'organizacion'=>'']);
+        // Buscar cliente existente por DNI o Email
+        $this->cliente = Cliente::where('dni', $this->dni)
+                            ->orWhere('email', $this->email)
+                            ->first();
+
+        // Si no existe, crear nuevo cliente y obtener su ID
+        if (!$this->cliente) {
+            $this->cliente = Cliente::create([
+                'nombre' => $this->nombre,
+                'dni' => $this->dni,
+                'email' => $this->email,
+                'telefono' => $this->telefono,
+                'direccion' => $this->direccion,
+                'geoposicion' => $this->geoposicion,
+                'organizacion' => ''
+            ]);
+        }
 
         $pedidos = Pedido::create([
-            'cliente_id' => $cliente_id, // $this->cliente,
+            'cliente_id' => $this->cliente->id, // $this->cliente,
             'nombre' => $this->nombre,
             'telefono' => $this->telefono,
             'direccion' => $this->direccion,
@@ -99,12 +113,27 @@ class EnviarComponent extends Component
             'retiraenlocal' => 1, // $this->retiraenlocal,
             'geoposicion' => 1, //$this->geoposicion,
             'observaciones' => $this->observaciones,
-            'costoaprox' =>26225,
+            'costoaprox' =>$this->PrecioEstimado,
             'created_at' => now(),
         ]);
         if($pedidos) $this->open = true;
         session()->flash('message', 'Pedido Enviado!!!');
         
         $this->reset('archivo','photo','cantidadhojas','tipodocumento','tamanopapel','tipodepapel','tipodeimpresion','frentedorso','cantidadejemplares','retiraenlocal','geoposicion','observaciones','costoaprox');
+    }
+
+    public function EstimarPrecio() {
+        // dd($this->tipodepapel);
+        // dd($this->gramajes['precio']);
+        $this->PrecioEstimado = $this->tipodepapel; // Tipo de papel
+        $this->PrecioEstimado = $this->PrecioEstimado * $this->cantidadhojas; // Cantidad de Hojas
+        $this->PrecioEstimado = $this->PrecioEstimado * $this->cantidadejemplares; // Cant. Copias
+        $this->PrecioEstimado = $this->PrecioEstimado * $this->tipodeimpresion; // Tipo de imp B/N
+        $this->PrecioEstimado = $this->PrecioEstimado * $this->frentedorso; // Frente/Dorso
+        // dd($this->PrecioEstimado);
+
+        
+                // {{ 'tipo papel' . $tipodepapel }} {{ 'tipoimpresion'.$tipodeimpresion }} {{ 'frentedorso'. $frentedorso }}
+                // <label for="">{{ $cantidadhojas }}</label>
     }
 }

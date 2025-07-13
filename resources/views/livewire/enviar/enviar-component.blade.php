@@ -12,6 +12,7 @@
         font-weight: bold; /* Texto en negrita (opcional) */
     }
 </style>
+    {{-- <form class="col-10 mx-auto mt-4"> --}}
     <form wire:submit.prevent="save" class="col-10 mx-auto mt-4">
         <div class="row">
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
@@ -58,13 +59,13 @@
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="cantidadhojas">Cantidad de Hojas:</label>
-                <input type="number" class="form-control" wire:model="cantidadhojas" placeholder="Cantidad de Hojas">
+                <input type="number" class="form-control" wire:model="cantidadhojas" wire:keyup="EstimarPrecio" placeholder="Cantidad de Hojas">
                 @error('cantidadhojas') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="tipoImpresion">Tipo de Impresión:</label>
-                <select id="tipoImpresion" class="form-control" wire:model="tipodeimpresion">
+                <select id="tipoImpresion" class="form-control" wire:model="tipodeimpresion" wire:change="EstimarPrecio">
                     <option value="">-- Seleccione un sistema</option>
                     @foreach ($sistemas as $sistema)
                         <option value="{{ $sistema->factor }}">{{ $sistema->sistema }}</option>
@@ -75,7 +76,7 @@
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="simpleDobleFas">Simple o Doble Faz:</label>
-                <select class="form-control" wire:model="frentedorso">
+                <select class="form-control" wire:model="frentedorso" wire:change="EstimarPrecio">
                     <option value="">-- Seleccione un lado</option>
                     @foreach ($lados as $lado)
                         <option value="{{ $lado->factor }}">{{ $lado->lados }}</option>
@@ -100,8 +101,8 @@
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="tipodepapel">Tipo de Papel:</label>
-                <select class="form-control" wire:model="tipodepapel">
-                    <option value="">-- Seleccione un gramaje</option>
+                <select class="form-control" wire:model="tipodepapel" wire:change="EstimarPrecio">
+                    <option value="0">-- Seleccione un gramaje</option>
                     @foreach ($gramajes as $gramaje)
                         <option value="{{ $gramaje->precio }}">{{ $gramaje->gramaje }} - {{ $gramaje->tamano_papel }}</option>
                     @endforeach
@@ -111,7 +112,7 @@
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="cantidadEjemplares">Cantidad de Ejemplares:</label>
-                <input type="number" class="form-control"  wire:model="cantidadejemplares" placeholder="Cantidad de Ejemplares">
+                <input type="number" class="form-control" wire:model="cantidadejemplares" wire:keyup="EstimarPrecio" placeholder="Cantidad de Ejemplares">
                 @error('cantidadejemplares') <span class="error">{{ $message }}</span> @enderror
             </div>
 
@@ -132,9 +133,7 @@
             
             </div>
             <div class="form-group col-sm-6 col-md-6 col-lg-4 mt-3 mb-2">
-                <label for="cantidadEjemplares">Costo Aproximado:</label>
-                <label for="cantidadEjemplares">$ {{ $cantidadhojas * $tipodepapel * $tipodeimpresion * $frentedorso }}</label>
-                <label for="">{{ $cantidadhojas }}</label>
+                <label for="cantidadEjemplares">Costo Aproximado: $ {{ number_format($PrecioEstimado,2,",",".") }}</label>
             </div>
         </div>
     
