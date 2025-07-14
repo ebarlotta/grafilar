@@ -59,17 +59,19 @@
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="cantidadhojas">Cantidad de Hojas:</label>
-                <input type="number" class="form-control" wire:model="cantidadhojas" wire:keyup="EstimarPrecio" placeholder="Cantidad de Hojas">
+                <input type="number" class="form-control" wire:model="cantidadhojas" wire:keyup="EstimarPrecio" wire:change="EstimarPrecio" placeholder="Cantidad de Hojas">
                 @error('cantidadhojas') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="tipoImpresion">Tipo de Impresión:</label>
                 <select id="tipoImpresion" class="form-control" wire:model="tipodeimpresion" wire:change="EstimarPrecio">
-                    <option value="">-- Seleccione un sistema</option>
-                    @foreach ($sistemas as $sistema)
-                        <option value="{{ $sistema->factor }}">{{ $sistema->sistema }}</option>
-                    @endforeach
+                    <option value="0">-- Seleccione un sistema</option>
+                    @if(!is_null($sistemas))
+                        @foreach ($sistemas as $sistema)
+                            <option value="{{ $sistema->id }}">{{ $sistema->sistema }}</option>
+                        @endforeach
+                    @endif
                 </select>
                 @error('tipodeimpresion') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -77,9 +79,9 @@
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="simpleDobleFas">Simple o Doble Faz:</label>
                 <select class="form-control" wire:model="frentedorso" wire:change="EstimarPrecio">
-                    <option value="">-- Seleccione un lado</option>
+                    <option value="0">-- Seleccione un lado</option>
                     @foreach ($lados as $lado)
-                        <option value="{{ $lado->factor }}">{{ $lado->lados }}</option>
+                        <option value="{{ $lado->id }}">{{ $lado->lados }}</option>
                     @endforeach
                 </select>
                 @error('frentedorso') <span class="error">{{ $message }}</span> @enderror
@@ -103,16 +105,18 @@
                 <label for="tipodepapel">Tipo de Papel:</label>
                 <select class="form-control" wire:model="tipodepapel" wire:change="EstimarPrecio">
                     <option value="0">-- Seleccione un gramaje</option>
-                    @foreach ($gramajes as $gramaje)
-                        <option value="{{ $gramaje->precio }}">{{ $gramaje->gramaje }} - {{ $gramaje->tamano_papel }}</option>
-                    @endforeach
+                    @if($gramajes)
+                        @foreach ($gramajes as $gramaje)
+                            <option value="{{ $gramaje->id }}">{{ $gramaje->gramaje }} - {{ $gramaje->tamano_papel }}</option>
+                        @endforeach
+                    @endif
                 </select>
                 @error('tipodepapel') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group col-sm-12 col-lg-6 col-xl-4 mb-2">
                 <label for="cantidadEjemplares">Cantidad de Ejemplares:</label>
-                <input type="number" class="form-control" wire:model="cantidadejemplares" wire:keyup="EstimarPrecio" placeholder="Cantidad de Ejemplares">
+                <input type="number" class="form-control" wire:model="cantidadejemplares" wire:keyup="EstimarPrecio" wire:change="EstimarPrecio" placeholder="Cantidad de Ejemplares">
                 @error('cantidadejemplares') <span class="error">{{ $message }}</span> @enderror
             </div>
 

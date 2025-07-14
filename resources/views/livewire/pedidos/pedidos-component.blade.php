@@ -83,7 +83,7 @@
             Datos del Trabajo
         </x-slot>
         <x-slot name="content">
-            <x-label value="nombre">{{ $nombre }}"></x-label>
+            <x-label value="nombre: {{ $nombre }}"></x-label>
             <x-label value="telefono: {{ $telefono }}"></x-label>
             <x-label value="direccion: {{ $direccion }}"></x-label>
             <x-label value="dni: {{ $dni }}"></x-label>
@@ -92,7 +92,7 @@
             <x-label value="email: {{ $email }}"></x-label>
             <x-label value="cantidadhojas: {{ $cantidadhojas }}"></x-label>
             <x-label value="tipodeimpresion: {{ $tipodeimpresion }}"></x-label>
-            <x-label value="tamanopapel: {{ $tamanopapel }}"></x-label>
+            {{-- <x-label value="tamanopapel: {{ $tamanopapel }}"></x-label> --}}
             <x-label value="tipodepapel: {{ $tipodepapel }}"></x-label>
             <x-label value="frentedorso: {{ $frentedorso }}"></x-label>
             <x-label value="cantidadejemplares: {{ $cantidadejemplares }}"></x-label>

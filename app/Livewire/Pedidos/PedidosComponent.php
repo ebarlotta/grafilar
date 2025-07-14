@@ -3,8 +3,9 @@
 namespace App\Livewire\Pedidos;
 
 use App\Models\Estado;
+use App\Models\papel;
 use App\Models\Pedido;
-
+use App\Models\sistema_impresion;
 use Livewire\Component;
 class PedidosComponent extends Component
 {
@@ -49,12 +50,13 @@ public function CargarDatos($id) {
     $this->institucion = $pedido->institucion;
     $this->email = $pedido->email;
     $this->cantidadhojas = $pedido->cantidadhojas;
-    $this->tipodeimpresion = $pedido->tipodeimpresion;
-    $this->tamanopapel = $pedido->tamanopapel;
-    $this->tipodepapel = $pedido->tipodepapel;
-    $this->frentedorso = $pedido->frentedorso;
+    $this->tipodeimpresion = sistema_impresion::find($pedido->tipodeimpresion)->get()[0]['sistema'];
+    // $this->tamanopapel = $pedido->tamanopapel;
+    $papel = papel::find($pedido->tipodepapel)->get();
+    $this->tipodepapel = $papel[0]->gramaje .' - '. $papel[0]->tamano_papel;
+    $this->frentedorso = ($pedido->frentedorso==1) ? 'Simple Faz' : 'Doble Faz';
     $this->cantidadejemplares = $pedido->cantidadejemplares;
-    $this->retiraenlocal = $pedido->retiraenlocal;
+    $this->retiraenlocal = $pedido->retiraenlocal ? 'Retira en local' : 'Entregar el domicilio';
     $this->lugardeentrega = $pedido->lugardeentrega;
     $this->geoposicion = $pedido->geoposicion;
     $this->costoaprox = $pedido->costoaprox;

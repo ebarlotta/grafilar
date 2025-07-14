@@ -42,9 +42,9 @@ class EnviarComponent extends Component
 
     public function render()
     {
-        $this->sistemas = sistema_impresion::where('activo',true)->get();
-        $this->lados = lado::where('activo',true)->get();
-        $this->gramajes = papel::where('activo',true)->get();
+        $this->sistemas = sistema_impresion::where('activo',true)->select('id','sistema')->get();
+        $this->lados = lado::where('activo',true)->select('id','lados')->get();
+        $this->gramajes = papel::where('activo',true)->select('id','tamano_papel','gramaje')->get();
 
         return view('livewire.enviar.enviar-component')->with('cantidadhojas')->extends('layouts.app');
         // return view('livewire.enviar.enviar-component');
@@ -125,15 +125,24 @@ class EnviarComponent extends Component
     public function EstimarPrecio() {
         // dd($this->tipodepapel);
         // dd($this->gramajes['precio']);
-        $this->PrecioEstimado = $this->tipodepapel; // Tipo de papel
-        $this->PrecioEstimado = $this->PrecioEstimado * $this->cantidadhojas; // Cantidad de Hojas
-        $this->PrecioEstimado = $this->PrecioEstimado * $this->cantidadejemplares; // Cant. Copias
-        $this->PrecioEstimado = $this->PrecioEstimado * $this->tipodeimpresion; // Tipo de imp B/N
-        $this->PrecioEstimado = $this->PrecioEstimado * $this->frentedorso; // Frente/Dorso
-        // dd($this->PrecioEstimado);
+        if($this->tipodepapel<>0 && $this->frentedorso<>0 and $this->tipodeimpresion<>0) {
+            if(is_null($this->cantidadhojas) || $this->cantidadhojas=='') $this->cantidadhojas=0;
+            if(is_null($this->cantidadejemplares) || $this->cantidadejemplares=='') $this->cantidadejemplares=0;
+            
+            $vTipoImpresion = is_null($this->tipodeimpresion) ? 0 : sistema_impresion::where('id','=',$this->tipodeimpresion)->get('factor')[0]['factor'];    //factor
+            $vLados = is_null($this->frentedorso) ? 0: lado::where('id','=',$this->frentedorso)->get('factor')[0]['factor'];    //factor
+            $vTipoPapel = is_null($this->tipodepapel) ? 0 : papel::where('id','=',$this->tipodepapel)->get('precio')[0]['precio'];   // precio
 
-        
-                // {{ 'tipo papel' . $tipodepapel }} {{ 'tipoimpresion'.$tipodeimpresion }} {{ 'frentedorso'. $frentedorso }}
-                // <label for="">{{ $cantidadhojas }}</label>
+            // dd($this->tipodeimpresion);
+            // dd($vTipoPapel);
+
+            $this->PrecioEstimado =  $vTipoPapel; // Tipo de papel
+            $this->PrecioEstimado = $this->PrecioEstimado * $this->cantidadhojas; // Cantidad de Hojas
+            $this->PrecioEstimado = $this->PrecioEstimado * $this->cantidadejemplares; // Cant. Copias
+            $this->PrecioEstimado = $this->PrecioEstimado * $vTipoImpresion; // Tipo de imp B/N
+            $this->PrecioEstimado = $this->PrecioEstimado * $vLados; // Frente/Dorso
+        } else {
+            $this->PrecioEstimado = 0;
+        }
     }
 }
