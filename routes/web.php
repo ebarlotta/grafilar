@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AdminComponent;
 use App\Livewire\Clientes\ClientesComponent;
 use App\Livewire\Convenios\ConveniosComponent;
 use App\Livewire\Estados\EstadosComponent;
@@ -26,6 +27,7 @@ Route::get('/precios', PreciosComponent::class)->name('precios');
 Route::get('/tiposdocumentos', TiposdocumentosComponent::class)->name('tiposdocumentos');
 Route::get('/politicas', PoliticasComponent::class)->name('politicas');
 Route::get('/enviar', EnviarComponent::class)->name('enviar');
+Route::get('/admin', AdminComponent::class)->name('admin');
 
 Route::get('/servicios', function () { return view('servicios'); })->name('servicios');
 Route::get('/nosotros', function () { return view('nosotros'); })->name('nosotros');
