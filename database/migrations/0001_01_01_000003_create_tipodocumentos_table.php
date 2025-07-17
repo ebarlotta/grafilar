@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tipodocumentos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }

@@ -14,5 +14,6 @@ class sistema_impresion extends Model
         'sistema',
         'factor',
         'activo',
+        'eliminado',
     ];
 }

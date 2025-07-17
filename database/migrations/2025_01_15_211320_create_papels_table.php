@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('gramaje');
             $table->double('precio');
             $table->boolean('activo')->default(true);
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }

@@ -14,5 +14,6 @@ class lado extends Model
         'lados',
         'factor',
         'activo',
+        'eliminado',
     ];
 }

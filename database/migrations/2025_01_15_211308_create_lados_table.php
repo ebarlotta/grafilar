@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('lados');
             $table->double('factor');
             $table->boolean('activo')->default(true);
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }

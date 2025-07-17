@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('sistema');
             $table->double('factor');
             $table->boolean('activo')->default(true);
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }

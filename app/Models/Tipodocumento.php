@@ -11,5 +11,6 @@ class Tipodocumento extends Model
 
     protected $fillable=[
         'name',
+        'eliminado',
     ];
 }

@@ -15,5 +15,6 @@ class papel extends Model
         'tamano_papel',
         'precio',
         'activo',
+        'eliminado',
     ];
 }
