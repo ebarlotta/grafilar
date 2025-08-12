@@ -11,7 +11,7 @@ class PedidosComponent extends Component
 {
     public $pedidos, $CambioEstado, $estado_id, $estados_id, $estados, $pedido_id, $pedido_name;
 
-    public $nombre, $telefono, $direccion, $dni, $cuit, $institucion, $email, $cantidadhojas, $tipodeimpresion, $tamanopapel, $tipodepapel, $frentedorso, $cantidadejemplares, $retiraenlocal, $lugardeentrega, $geoposicion, $costoaprox;
+    public $nombre, $telefono, $direccion, $dni, $cuit, $institucion, $email, $cantidadhojas, $tipodeimpresion, $tamanopapel, $tipodepapel, $frentedorso, $cantidadejemplares, $retiraenlocal, $lugardeentrega, $geoposicion, $costoaprox, $archivo;
 
     public $open=false, $datos=false;
 
@@ -60,6 +60,7 @@ public function CargarDatos($id) {
     $this->lugardeentrega = $pedido->lugardeentrega;
     $this->geoposicion = $pedido->geoposicion;
     $this->costoaprox = $pedido->costoaprox;
+    $this->archivo = substr($pedido->archivo,14);
 
 }
 

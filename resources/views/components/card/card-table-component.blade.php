@@ -15,7 +15,9 @@
                 if($item->activo==1) { echo '<td><span class="badge text-bg-primary rounded-pill bg-green-500 p-2" wire:click="activar(\'' . $listado. '\',\'' . $item->id. '\',\''. $item->activo .'\')"><i class="fa-solid fa-check"></i></span></td>'; } else { echo '<td><span class="badge text-bg-primary rounded-pill bg-red-500 p-2" wire:click="activar(\'' . $listado. '\',\'' . $item->id. '\',\''. $item->activo .'\')">X</span></td>'; }
                 echo '<td>
                         <!-- Botón Aceptar (Verde) -->              <button type="button" class="btn btn-success btn-icon" title="Aceptar" wire:click="pseudo_modal(\'papeles\')"><i class="fas fa-check"></i></button>
-                        <!-- Botón Modificar (Amarillo/Naranja) --> <button type="button" class="btn btn-warning btn-icon" title="Modificar" wire:click="pseudo_modal()"><i class="fas fa-pencil-alt"></i></button>
+                        ';
+                        // <!-- Botón Modificar (Amarillo/Naranja) --> <button type="button" class="btn btn-warning btn-icon" title="Modificar" wire:click="pseudo_modal()"><i class="fas fa-pencil-alt"></i></button>
+                        echo '
                         <!-- Botón Eliminar (Rojo) -->              <button type="button" class="btn btn-danger btn-icon"  title="Eliminar" wire:click="eliminar(\'' . $listado. '\',\'' . $item->id. '\')"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>';
@@ -33,7 +35,9 @@
                 if($item->activo==1) { echo '<td><span class="badge text-bg-primary rounded-pill bg-green-500 p-2" wire:click="activar(\'' . $listado. '\',\'' . $item->id. '\',\''. $item->activo .'\')"><i class="fa-solid fa-check"></i></span></td>'; } else { echo '<td><span class="badge text-bg-primary rounded-pill bg-red-500 p-2" wire:click="activar(\'' . $listado. '\',\'' . $item->id. '\',\''. $item->activo .'\')">X</span></td>'; }
                 echo '<td>
                         <!-- Botón Aceptar (Verde) --><button type="button" class="btn btn-success btn-icon" title="Aceptar" wire:click="pseudo_modal(\'lados\')"><i class="fas fa-check"></i></button>
-                        <!-- Botón Modificar (Amarillo/Naranja) --><button type="button" class="btn btn-warning btn-icon" title="Modificar"><i class="fas fa-pencil-alt"></i></button>
+                        ';
+                        // <!-- Botón Modificar (Amarillo/Naranja) --><button type="button" class="btn btn-warning btn-icon" title="Modificar"><i class="fas fa-pencil-alt"></i></button>
+                        echo '
                         <!-- Botón Eliminar (Rojo) --><button type="button" class="btn btn-danger btn-icon" title="Eliminar" wire:click="eliminar(\'' . $listado. '\',\'' . $item->id. '\')"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>';
@@ -49,8 +53,9 @@
                     <td>'. $item->factor .'</td>';
                 if($item->activo==1) { echo '<td><span class="badge text-bg-primary rounded-pill bg-green-500 p-2" wire:click="activar(\'' . $listado. '\',\'' . $item->id. '\',\''. $item->activo .'\')"><i class="fa-solid fa-check"></i></span></td>'; } else { echo '<td><span class="badge text-bg-primary rounded-pill bg-red-500 p-2" wire:click="activar(\'' . $listado. '\',\'' . $item->id. '\',\''. $item->activo .'\')">X</span></td>'; }
                 echo '<td>
-                        <!-- Botón Aceptar (Verde) --><button type="button" class="btn btn-success btn-icon" title="Aceptar" wire:click="pseudo_modal(\'sistemas\')"><i class="fas fa-check"></i></button>
-                        <!-- Botón Modificar (Amarillo/Naranja) --><button type="button" class="btn btn-warning btn-icon" title="Modificar"><i class="fas fa-pencil-alt"></i></button>
+                        <!-- Botón Aceptar (Verde) --><button type="button" class="btn btn-success btn-icon" title="Aceptar" wire:click="pseudo_modal(\'sistemas\')"><i class="fas fa-check"></i></button>';
+                        // <!-- Botón Modificar (Amarillo/Naranja) --><button type="button" class="btn btn-warning btn-icon" title="Modificar"><i class="fas fa-pencil-alt"></i></button>
+                echo '
                         <!-- Botón Eliminar (Rojo) --><button type="button" class="btn btn-danger btn-icon" title="Eliminar" wire:click="eliminar(\'' . $listado. '\',\'' . $item->id. '\')"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>';
@@ -68,7 +73,9 @@
                     
                     <td>
                         <!-- Botón Aceptar (Verde) --><button type="button" class="btn btn-success btn-icon" title="Aceptar" wire:click="pseudo_modal(\'tipos\')"><i class="fas fa-check"></i></button>
-                        <!-- Botón Modificar (Amarillo/Naranja) --><button type="button" class="btn btn-warning btn-icon" title="Modificar"><i class="fas fa-pencil-alt"></i></button>
+                        ';
+                        // <!-- Botón Modificar (Amarillo/Naranja) --><button type="button" class="btn btn-warning btn-icon" title="Modificar"><i class="fas fa-pencil-alt"></i></button>
+                        echo '
                         <!-- Botón Eliminar (Rojo) --><button type="button" class="btn btn-danger btn-icon" title="Eliminar" wire:click="eliminar(\'' . $listado. '\',\'' . $item->id. '\')"><i class="fas fa-trash-alt"></i></button>
                     </td>
 

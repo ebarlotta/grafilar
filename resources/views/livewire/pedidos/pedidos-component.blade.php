@@ -53,7 +53,7 @@
                             <!-- <a href="{{ 'storage/' . substr($pedido->archivo,7) }}" target="_blank"><button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded">Descargar</button></a> -->
                             <button class="hidden lg:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold py-2 px-4 mr-2 rounded" wire:click="CargarDatos({{ $pedido->id }})">Datos útiles de impresión</button>
                             <button type="button" class="btn btn-primary" wire:click="CargarEstado({{ $pedido->id }})">Cambiar Estado</button>
-                            <button type="button" class="btn btn-warning px-2" wire:click="EnviarBaul({{ $pedido->id }})">Enviar al baúl</button>
+                            <button type="button" class="btn btn-warning px-2 ml-2" wire:click="EnviarBaul({{ $pedido->id }})">Enviar al baúl</button>
                         </div>
                     </td>
                 </tr>
@@ -74,7 +74,7 @@
         </x-slot>
         <x-slot name="footer">
             <x-button class="btn btn-success" wire:click="CambiarEstado()">Cambiar</x-button>
-            <x-button  class="btn btn-info" wire:click="OcultarCambioEstado()">Cerrar</x-button>
+            <x-button  class="btn btn-info ml-3" wire:click="OcultarCambioEstado()">Cerrar</x-button>
         </x-slot>
     </x-dialog-modal>
 
@@ -100,6 +100,7 @@
             <x-label value="lugardeentrega: {{ $lugardeentrega }}"></x-label>
             <x-label value="geoposicion: {{ $geoposicion }}"></x-label>
             <x-label value="costoaprox: {{ $costoaprox }}"></x-label>
+            <x-label value="Archivo: {{ $archivo }}"></x-label>
         </x-slot>
         <x-slot name="footer">
             <x-button  class="btn btn-info" wire:click="OcultarDatos()">Cerrar</x-button>
